@@ -39,10 +39,36 @@ example(data) {
 ```
 - 꼭 setState() 함수로 state를 관리할 필요는 없음. 출력 검증 작업 없이 함수가 호출될 때마다 새롭게 화면을 출력하고 싶다면 클래스 인스턴스 변수와 화면을 강제로 출력해주는 forceUpdate() 함수를 사용하면 됨. (단, 이 방법은 리액트 성능에 제약이 있으므로 매번 새롭게 화면을 출력해야 되는 경우가 아니라면 가급적 사용하지 않는 것을 권장함.)
 ### 생명주기 함수
-constructor(props) 함수   
+#### constructor(props) 함수
 - 맨 처음에 생성될 때 한 번만 호출됨.
 - 상태(state 또는 객체 변수)를 선언할 때 사용됨.
 - 항상 super() 함수를 가장 위에 호출해야 함. super() 함수에 프로퍼티와 생명 주기 상태 등을 초기화하는 과정을 포함하고 있기 때문임.
+#### render() 함수
+- 데이터가 변경되어 새 화면을 그려야 할 때 자동으로 호출되는 함수.
+- render() 함수가 반환하는 JSX를 화면에 그려줌.
+#### static getDerivedStateFromProps(props, state) 함수
+- getDerivedStateFromProps() 함수는 정적 함수임. 따라서 함수 안에서 this.props나 this.state와 같은 방법으로 프로퍼티나 state값에 접근할 수 없음.
+- 각 값에 접근해야 하는 경우 반드시 인자로 전달된 props, state를 이용해야 함. 이때 props는 상위 컴포넌트에서 전달된 값이며, state는 현재 컴포넌트의 state값임.
+- 이 함수는 상위 컴포넌트에서 전달받은 프로퍼티로 state값을 연동할 때 주로 사용되며, 반환값으로 state를 변경함.
+#### componentDidMount() 함수
+- render() 함수가 JSX를 화면에 그린 이후에 호출되는 함수.
+- 만약 컴포넌트가 화면에 모두 표현된 이후 해야 하는 작업들은 여기에서 하면 됨.
+#### shouldComponentUpdate(nextProps, nextState) 함수
+- 프로퍼티를 변경하거나 setState() 함수를 호출하여 state값을 변경하면 화면을 새로 출력해야 하는지 판단하는 함수임. 리액트 성능에 영향을 많이 줌.
+- 화면 변경을 위해 검증 작업을 해야 하는 경우 이 함수를 사용하면 됨.
+- forceUpdate() 함수를 호출하여 화면을 출력하면 이 함수는 호출되지 않음.
+#### getSnapshotBeforeUpdate(prevProps, prevState) 함수
+- 컴포넌트의 변경된 내용이 가상화면에 완성된 이후 호출되는 함수.
+- 이 함수는 컴포넌트가 화면에 실제로 출력되기 전에 호출되므로 화면에 출력될 엘리먼트의 크기 또는 스크롤 위치 등의 DOM 정보에 접근할 때 사용됨.
+#### componentDidUpdate(prevProps, prevState, snapshot) 함수
+- 컴포넌트가 실제 화면에 출력된 이후 호출되는 함수.
+- 이 함수는 부모 컴포넌트로부터 전달된 이전 프로퍼티(prevProps)와 이전 state값(prevState)과 함께 getSnapshotBeforeUpdate() 함수에서 반환된 값(snapshot)을 인자로 전달 받음.
+- 이 값들을 이용하여 스크롤 위치를 옮기거나 커서를 이동시키는 등의 DOM 정보를 변경할 때 사용됨.
+#### componentWillUnmount() 함수
+- 컴포넌트가 소멸되기 직전에 호출되는 함수.
+- 컴포넌트에서 감시하고 있는 작업들을 해제할 때 필요한 함수.
+- 예를 들어 컴포넌트에 setInterval() 함수가 사용되었다면 이 함수에서 clearInterval() 함수로 해제해야 함. 이러한 해제 작업이 생략되면 메모리 누수 현상이 발생하여 웹 브라우저의 작동이 멈추기도 함.
+
 # 웹팩 코드 검색 확장자(webpack module resolution)의 파일 검색 순서
 1. 파일 이름에 확장자가 있는 파일을 먼저 임포트함.
 2. 파일 이름에 확장자가 없는 경우 웹팩의 확장자 옵션에 정의된 확장자 목록을 보고 해당 확장자 이름을 포함한 파일이 있는지 확인하여 임포트함. 예를 들어 import 'MyFile';의 경우 MyFile.js > MyFile.jsx 순서로 파일을 확인하여 임포트함.
