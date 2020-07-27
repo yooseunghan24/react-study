@@ -73,3 +73,5 @@ example(data) {
 1. 파일 이름에 확장자가 있는 파일을 먼저 임포트함.
 2. 파일 이름에 확장자가 없는 경우 웹팩의 확장자 옵션에 정의된 확장자 목록을 보고 해당 확장자 이름을 포함한 파일이 있는지 확인하여 임포트함. 예를 들어 import 'MyFile';의 경우 MyFile.js > MyFile.jsx 순서로 파일을 확인하여 임포트함.
 3. 지정 경로에 해당 파일이 없으면 같은 이름의 폴더를 검색함. 같은 이름의 폴더가 있다면 그 안에 있는 index 파일을 검색. 예를 들어 import 'MyComponent';의 경우 MyComponent.js > MyComponent.jsx 순서로 확인함. 파일이 없으면 MyComponent 폴더를 검색하고 해당 폴더가 있는 경우 폴더 안에서 index.js > index.jsx 순서로 파일을 확인하여 임포트함.
+# 자잘한 팁
+- 쓸데없는 div 처리 방법: \<React.fragment></React.fragment>. 만약 바벨이 지원한다면 \<></> 이렇게 써도 됨.
