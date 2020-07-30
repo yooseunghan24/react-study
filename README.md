@@ -1,5 +1,5 @@
 # react-study
-리액트 공부 내용 기록.(출처: Do it! 리액트 프로그래밍 정석)
+리액트 공부 내용 기록.(출처: Do it! 리액트 프로그래밍 정석 )
 # JSX
 - 개발자가 JSX를 작성하면 리액트 엔진은 JSX를 기존 자바스크립트로 해석하는 역할을 함. 이것을 선언형 화면(Declarative View)기술이라 부름. JSX는 개발자가 화면 구성에만 집중할 수 있도록 도와줌.
 # 컴포넌트
@@ -89,9 +89,17 @@ class example extends React.Component {
   }
 }
 ```
+# Hooks
+- 함수형에도 setState와 ref를 쓸 수 있게 됨. 또한 코드가 간결해짐!
+```
+const [value, setValue] = React.useState(초깃값);
+```
+이런식으로 작성. value를 state, setValue를 setState로 보면 됨. 
 # 웹팩 코드 검색 확장자(webpack module resolution)의 파일 검색 순서
 1. 파일 이름에 확장자가 있는 파일을 먼저 임포트함.
 2. 파일 이름에 확장자가 없는 경우 웹팩의 확장자 옵션에 정의된 확장자 목록을 보고 해당 확장자 이름을 포함한 파일이 있는지 확인하여 임포트함. 예를 들어 import 'MyFile';의 경우 MyFile.js > MyFile.jsx 순서로 파일을 확인하여 임포트함.
 3. 지정 경로에 해당 파일이 없으면 같은 이름의 폴더를 검색함. 같은 이름의 폴더가 있다면 그 안에 있는 index 파일을 검색. 예를 들어 import 'MyComponent';의 경우 MyComponent.js > MyComponent.jsx 순서로 확인함. 파일이 없으면 MyComponent 폴더를 검색하고 해당 폴더가 있는 경우 폴더 안에서 index.js > index.jsx 순서로 파일을 확인하여 임포트함.
 # 자잘한 팁
 - 쓸데없는 div 처리 방법: \<React.fragment></React.fragment>. 만약 바벨이 지원한다면 \<></> 이렇게 써도 됨.
+- '비구조화 할당'과 '구조 분해 할당'은 같은 말임. 번역차이일뿐(원문: Destructuring assignment).
+- class -> className, for(label에 쓰는 for) -> htmlFor
