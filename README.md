@@ -68,7 +68,27 @@ example(data) {
 - 컴포넌트가 소멸되기 직전에 호출되는 함수.
 - 컴포넌트에서 감시하고 있는 작업들을 해제할 때 필요한 함수.
 - 예를 들어 컴포넌트에 setInterval() 함수가 사용되었다면 이 함수에서 clearInterval() 함수로 해제해야 함. 이러한 해제 작업이 생략되면 메모리 누수 현상이 발생하여 웹 브라우저의 작동이 멈추기도 함.
-
+### PureComponent
+- PureComponent 클래스는 Component 클래스를 상속받은 클래스.
+- PureComponent 클래스는 shouldComponentUpdate() 함수를 '얕은 비교'를 하도록 재정의 함. 즉, PureComponent 클래스로 만들어진 컴포넌트는 '얕은 비교를 통해 데이터가 변경된 경우'에만 render() 함수 호출함. 반면 Component 클래스로 만들어진 컴포넌트는 항상 render() 함수를 호출함.
+### 함수형 컴포넌트
+```
+function example(props) {
+  const {onButtonClick, hasPlan} = props;
+  return (
+    <div></div>
+  );
+}
+// 클래스형 컴포넌트
+class example extends React.Component {
+  render() {
+    const {onButtonClick, hasPlan} = this.props;
+    return (
+      <div></div>
+    );
+  }
+}
+```
 # 웹팩 코드 검색 확장자(webpack module resolution)의 파일 검색 순서
 1. 파일 이름에 확장자가 있는 파일을 먼저 임포트함.
 2. 파일 이름에 확장자가 없는 경우 웹팩의 확장자 옵션에 정의된 확장자 목록을 보고 해당 확장자 이름을 포함한 파일이 있는지 확인하여 임포트함. 예를 들어 import 'MyFile';의 경우 MyFile.js > MyFile.jsx 순서로 파일을 확인하여 임포트함.
