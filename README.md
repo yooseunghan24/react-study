@@ -103,3 +103,5 @@ const [value, setValue] = React.useState(초깃값);
 - 쓸데없는 div 처리 방법: \<React.fragment></React.fragment>. 만약 바벨이 지원한다면 \<></> 이렇게 써도 됨.
 - '비구조화 할당'과 '구조 분해 할당'은 같은 말임. 번역차이일뿐(원문: Destructuring assignment).
 - class -> className, for(label에 쓰는 for) -> htmlFor
+- 웹팩은 실서비스에서는 안쓰이고 개발할 때만 쓰임.
+- package.json에서 dependencies는 실서비스에서 사용되는 것, devDependencies는 개발할 때만 사용되는 것.
