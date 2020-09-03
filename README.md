@@ -105,3 +105,14 @@ const [value, setValue] = React.useState(초깃값);
 - class -> className, for(label에 쓰는 for) -> htmlFor
 - 웹팩은 실서비스에서는 안쓰이고 개발할 때만 쓰임.
 - package.json에서 dependencies는 실서비스에서 사용되는 것, devDependencies는 개발할 때만 사용되는 것.
+```
+presets: [
+  ['@babel/preset-env', {
+    targets: {
+      browsers: ['> 1% in KR'],
+    },
+   }],
+    '@babel/preset-react',
+   ],
+```
+한국에서 점유율이 1% 초과인 브라우저들을 자동으로 지원하도록 웹팩이 환경을 만들어줌.(제로초 강의)
